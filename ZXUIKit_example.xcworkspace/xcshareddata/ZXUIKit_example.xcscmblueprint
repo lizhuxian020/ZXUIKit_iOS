@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "9939FF60757E4F9FEE4E748BD757BD7D8F93677C",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "9939FF60757E4F9FEE4E748BD757BD7D8F93677C" : 9223372036854775807,
+    "7CA5DDF44B384D2AD0587C04C0048948DC43B13E" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "36488666-03C9-47E0-A51E-AED608B1B3A5",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "9939FF60757E4F9FEE4E748BD757BD7D8F93677C" : "ZXUIKit_iOS\/",
+    "7CA5DDF44B384D2AD0587C04C0048948DC43B13E" : "ZXUIKit_iOS\/ZXConvenientCode\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "ZXUIKit_example",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "ZXUIKit_example.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:lizhuxian020\/ZXConvenientCode.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7CA5DDF44B384D2AD0587C04C0048948DC43B13E"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:lizhuxian020\/ZXUIKit_iOS.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9939FF60757E4F9FEE4E748BD757BD7D8F93677C"
+    }
+  ]
+}

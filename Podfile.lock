@@ -1,19 +1,24 @@
 PODS:
   - Masonry (1.0.2)
-  - ZXConvenientCode (1.0.2)
+  - ZXConvenientCode (1.0.4):
+    - ZXConvenientCode/Interface (= 1.0.4)
+    - ZXConvenientCode/Module (= 1.0.4)
+  - ZXConvenientCode/Interface (1.0.4):
+    - ZXConvenientCode/Module
+  - ZXConvenientCode/Module (1.0.4)
 
 DEPENDENCIES:
   - Masonry (~> 1.0.2)
-  - ZXConvenientCode (from `../ZXConvenientCode`)
+  - ZXConvenientCode (from `./ZXConvenientCode`)
 
 EXTERNAL SOURCES:
   ZXConvenientCode:
-    :path: "../ZXConvenientCode"
+    :path: "./ZXConvenientCode"
 
 SPEC CHECKSUMS:
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
-  ZXConvenientCode: 8837a837e58bcaf5e54e65da91e01874015e7aad
+  ZXConvenientCode: 054b3b4d06db88507e2e6e710a62478b668c91bc
 
-PODFILE CHECKSUM: 57eb8bcef0cd7ba79507fea2e120f736802e4ae1
+PODFILE CHECKSUM: 066a237e1f3eaffccbd38a57b3cfe99275d98597
 
 COCOAPODS: 1.1.0

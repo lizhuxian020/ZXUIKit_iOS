@@ -9,6 +9,6 @@ target 'ZXUIKit_example' do
 
 pod 'Masonry', '~> 1.0.2'
 
-pod 'ZXConvenientCode', :path => '../ZXConvenientCode'
+pod 'ZXConvenientCode', :path => './ZXConvenientCode'
 
 end
