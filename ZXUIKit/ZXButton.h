@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <ZXConvenientCode/ZXSugarCode.h>
 
 typedef NS_ENUM(NSInteger, ZXButtonType) {
     ZXButtonType_Normal,
