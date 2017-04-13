@@ -32,6 +32,7 @@
 		74D71A471E9E5369000D29A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		74D71A4E1E9E5C9E000D29A5 /* ZXButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXButton.h; sourceTree = "<group>"; };
 		74D71A4F1E9E5C9E000D29A5 /* ZXButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXButton.m; sourceTree = "<group>"; };
+		74E600D51E9F5C1E0008FFF6 /* ZXUIKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXUIKit.h; sourceTree = "<group>"; };
 		DD443D1973D6083568EE1134 /* libPods-ZXUIKit_example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZXUIKit_example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -110,6 +111,7 @@
 		74D71A4D1E9E5C93000D29A5 /* ZXUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				74E600D51E9F5C1E0008FFF6 /* ZXUIKit.h */,
 				74D71A4E1E9E5C9E000D29A5 /* ZXButton.h */,
 				74D71A4F1E9E5C9E000D29A5 /* ZXButton.m */,
 			);

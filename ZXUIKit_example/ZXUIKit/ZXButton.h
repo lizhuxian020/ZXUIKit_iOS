@@ -7,7 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <ZXConvenientCode/ZXSugarCode.h>
 
-@interface ZXButton : UIView
+typedef NS_ENUM(NSInteger, ZXButtonType) {
+    ZXButtonType_Normal,
+    ZXButtonType_Rectangle,
+    ZXButtonType_Stroke,
+    ZXButtonType_Text
+};
 
+@interface ZXButton : UIButton
+
+- (instancetype)initWithTitle:(NSString *)title
+                    attribute:(NSDictionary *)attribute
+                        color:(UIColor *)color
+                         type:(ZXButtonType)type;
 @end
