@@ -55,7 +55,7 @@
     self.layer.borderColor = _themeColor.CGColor;
 }
 
-#warning 性能不太好..以后改
+//#warning 性能不太好..以后改
 - (void)drawRect:(CGRect)rect {
     [_themeColor set];
 
