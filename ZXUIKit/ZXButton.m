@@ -47,14 +47,6 @@
     return self;
 }
 
-//- (void)makeNormalWithTitle:(NSString *)title color:(UIColor *)color
-
-- (void)showBorder {
-    CGFloat scale = [UIScreen mainScreen].scale;
-    self.layer.borderWidth = 1.0 / scale;
-    self.layer.borderColor = _themeColor.CGColor;
-}
-
 //#warning 性能不太好..以后改
 - (void)drawRect:(CGRect)rect {
     [_themeColor set];
