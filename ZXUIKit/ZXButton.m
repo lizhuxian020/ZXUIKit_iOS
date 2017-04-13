@@ -7,7 +7,6 @@
 //
 
 #import "ZXButton.h"
-#import <ZXSugarCode.h>
 
 @interface ZXButton () {
     UIColor *_themeColor;
@@ -24,9 +23,9 @@
                          type:(ZXButtonType)type {
     self = [super init];
     if (self) {
-        OBJC_ISEMPTY(title) ? title = @"ZXButton": nil;
-        OBJC_ISEMPTY(color) ? color = [UIColor blueColor]: nil;
-        OBJC_ISEMPTY(attribute) ?
+        title == nil || title.length == 0 ? title = @"ZXButton": nil;
+        color == nil ? color = [UIColor blueColor]: nil;
+        attribute == nil || attribute.allKeys.count == 0 ?
             attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:12]} : nil;
         _themeColor = color;
         _type = type;
