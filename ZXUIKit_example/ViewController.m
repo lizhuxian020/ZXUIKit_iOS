@@ -10,7 +10,7 @@
 //#import "ZXButton.h"
 #import "ZXUIKit.h"
 #import <Masonry.h>
-#import <ZXConvenientCode/ZXSugarCode.h>
+//#import <ZXConvenientCode/ZXSugarCode.h>
 
 @interface ViewController ()
 
@@ -25,8 +25,6 @@
     ZXButton *btn = [[ZXButton alloc] initWithTitle:@"" attribute:@{} color:nil type:ZXButtonType_Normal];
     [self.view addSubview:btn];
     [btn sizeToFit];
-    btn.zx_width = 100;
-    btn.zx_height = 80;
     btn.center = self.view.center;
 }
 
