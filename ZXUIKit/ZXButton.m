@@ -31,6 +31,7 @@
         _type = type;
         [self setTitle:title forState:UIControlStateNormal];
         self.titleLabel.font = [attribute valueForKey:NSFontAttributeName];
+        self.backgroundColor = [UIColor whiteColor];
         switch (type) {
             case ZXButtonType_Normal:
             case ZXButtonType_Stroke:
