@@ -10,7 +10,7 @@
 //#import "ZXButton.h"
 #import "ZXUIKit.h"
 #import <Masonry.h>
-//#import <ZXConvenientCode/ZXSugarCode.h>
+#import <ZXConvenientCode/ZXSugarCode.h>
 
 @interface ViewController ()
 
@@ -22,9 +22,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    ZXButton *btn = [[ZXButton alloc] initWithTitle:@"" attribute:@{} color:nil type:ZXButtonType_Normal];
+    
+    ZXButton *btn = [[ZXButton alloc] initWithTitle:@"" attribute:@{} color:[UIColor zx_colorWithHexString:@"#f13a28"] type:ZXButtonType_Rectangle];
     [self.view addSubview:btn];
     [btn sizeToFit];
+    CGRect frame = btn.frame;
+    frame.size.width += 100;
+    btn.frame = frame;
     btn.center = self.view.center;
 }
 
