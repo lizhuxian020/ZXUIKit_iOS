@@ -22,7 +22,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    
     ZXButton *btn = [[ZXButton alloc] initWithTitle:@"" attribute:@{} color:[UIColor zx_colorWithHexString:@"#f13a28"] type:ZXButtonType_Rectangle];
     [self.view addSubview:btn];
     [btn sizeToFit];
@@ -30,6 +29,8 @@
     frame.size.width += 100;
     btn.frame = frame;
     btn.center = self.view.center;
+    
+    
 }
 
 

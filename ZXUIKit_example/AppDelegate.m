@@ -17,6 +17,15 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    self.window = [[UIWindow alloc] initWithFrame:kScreenB];
+    
+    self.window.backgroundColor = [UIColor brownColor];
+    
+    self.window.rootViewController = [[ZXDragViewController alloc] init];
+    
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
