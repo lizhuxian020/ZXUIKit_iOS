@@ -9,10 +9,11 @@
 #import "ZXDragViewController.h"
 #import "ZXDrayLayout.h"
 #import "DragCellModel.h"
+#import "ZXDragView.h"
 
 @interface ZXDragViewController ()<UICollectionViewDataSource>
 
-@property(nonatomic, strong) UICollectionView *collectionView;
+@property(nonatomic, strong) ZXDragView *collectionView;
 
 @property(nonatomic, strong) NSMutableArray *dataSource;
 
@@ -45,7 +46,7 @@ static NSString * const headerIdentifier = @"header";
 }
 
 - (void)loadCollectionView {
-    self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:[ZXDrayLayout new]];
+    self.collectionView = [[ZXDragView alloc] initWithFrame:self.view.bounds collectionViewLayout:[ZXDrayLayout new]];
     // Register cell classes
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     [self.collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerIdentifier];

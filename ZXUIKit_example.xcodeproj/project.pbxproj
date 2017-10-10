@@ -12,6 +12,7 @@
 		741031A01F8CB6B300511628 /* ZXDragViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7410319D1F8CB6B300511628 /* ZXDragViewController.m */; };
 		741031A41F8CC18600511628 /* ZXDrayLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 741031A31F8CC18600511628 /* ZXDrayLayout.m */; };
 		741031A91F8CC9ED00511628 /* DragCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 741031A81F8CC9ED00511628 /* DragCellModel.m */; };
+		74B11E221F8CF4AA00B8CDF2 /* ZXDragView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74B11E211F8CF4AA00B8CDF2 /* ZXDragView.m */; };
 		74D71A381E9E5369000D29A5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D71A371E9E5369000D29A5 /* main.m */; };
 		74D71A3B1E9E5369000D29A5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D71A3A1E9E5369000D29A5 /* AppDelegate.m */; };
 		74D71A431E9E5369000D29A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74D71A421E9E5369000D29A5 /* Assets.xcassets */; };
@@ -33,6 +34,8 @@
 		741031A31F8CC18600511628 /* ZXDrayLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXDrayLayout.m; sourceTree = "<group>"; };
 		741031A71F8CC9ED00511628 /* DragCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragCellModel.h; sourceTree = "<group>"; };
 		741031A81F8CC9ED00511628 /* DragCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragCellModel.m; sourceTree = "<group>"; };
+		74B11E201F8CF4AA00B8CDF2 /* ZXDragView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXDragView.h; sourceTree = "<group>"; };
+		74B11E211F8CF4AA00B8CDF2 /* ZXDragView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXDragView.m; sourceTree = "<group>"; };
 		74D71A331E9E5369000D29A5 /* ZXUIKit_example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZXUIKit_example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74D71A371E9E5369000D29A5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		74D71A391E9E5369000D29A5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -123,6 +126,8 @@
 		741031A51F8CC63C00511628 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				74B11E201F8CF4AA00B8CDF2 /* ZXDragView.h */,
+				74B11E211F8CF4AA00B8CDF2 /* ZXDragView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -311,6 +316,7 @@
 			files = (
 				741031A01F8CB6B300511628 /* ZXDragViewController.m in Sources */,
 				741031A41F8CC18600511628 /* ZXDrayLayout.m in Sources */,
+				74B11E221F8CF4AA00B8CDF2 /* ZXDragView.m in Sources */,
 				741031A91F8CC9ED00511628 /* DragCellModel.m in Sources */,
 				74D71A3B1E9E5369000D29A5 /* AppDelegate.m in Sources */,
 				7410319E1F8CB6B300511628 /* ZXButton.m in Sources */,
