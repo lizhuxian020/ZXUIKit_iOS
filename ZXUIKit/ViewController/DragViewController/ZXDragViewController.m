@@ -21,6 +21,7 @@
 @implementation ZXDragViewController
 
 static NSString * const reuseIdentifier = @"Cell";
+static NSString * const headerIdentifier = @"header";
 
 - (instancetype)init {
     self = [super init];
@@ -47,6 +48,7 @@ static NSString * const reuseIdentifier = @"Cell";
     self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:[ZXDrayLayout new]];
     // Register cell classes
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
+    [self.collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerIdentifier];
     
     [self.view addSubview:self.collectionView];
 }
@@ -107,6 +109,13 @@ static NSString * const reuseIdentifier = @"Cell";
     cell.backgroundColor = model.bgColor;
     
     return cell;
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+    UICollectionReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerIdentifier forIndexPath:indexPath];
+    view.backgroundColor = UIColor.yellowColor;
+    
+    return view;
 }
 
 #pragma mark <UICollectionViewDelegate>
