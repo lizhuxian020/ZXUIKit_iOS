@@ -49,11 +49,10 @@ static NSString * const reuseIdentifier = @"Cell";
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     
     [self.view addSubview:self.collectionView];
-    self.view.backgroundColor = UIColor.blueColor;
 }
 
 - (void)viewConfig {
-    self.collectionView.backgroundColor = [UIColor blueColor];
+    self.collectionView.backgroundColor = [UIColor whiteColor];
     self.collectionView.bounces = true;
     self.collectionView.dataSource = self;
 }
@@ -62,12 +61,12 @@ static NSString * const reuseIdentifier = @"Cell";
     NSMutableArray *datasource = @[@[].mutableCopy, @[].mutableCopy, @[].mutableCopy].mutableCopy;
     for (NSInteger i = 0; i < datasource.count; i ++) {
         NSMutableArray *section = datasource[i];
-        for (NSInteger j = 0; j < 8; i ++) {
+        for (NSInteger j = 0; j < 8; j ++) {
             NSString *title = [NSString stringWithFormat:@"item%ld-%ld", (long)i, (long)j];
             UIColor *color = nil;
             if (i == 0) color = UIColor.redColor;
-            if (i == 1) color = UIColor.blueColor;
-            if (i == 2) color = UIColor.brownColor;
+            else if (i == 1) color = UIColor.blueColor;
+            else if (i == 2) color = UIColor.brownColor;
             DragCellModel *model = [DragCellModel modelWithTitle:title gbColor:color];
             [section addObject:model];
         }

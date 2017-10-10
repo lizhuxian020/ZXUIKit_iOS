@@ -20,7 +20,7 @@
     
     self.window = [[UIWindow alloc] initWithFrame:kScreenB];
     
-    self.window.backgroundColor = [UIColor brownColor];
+    self.window.backgroundColor = [UIColor whiteColor];
     
     self.window.rootViewController = [[ZXDragViewController alloc] init];
     
