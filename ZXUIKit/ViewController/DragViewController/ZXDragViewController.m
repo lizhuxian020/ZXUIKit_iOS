@@ -10,8 +10,9 @@
 #import "ZXDrayLayout.h"
 #import "DragCellModel.h"
 #import "ZXDragView.h"
+#import "ZXDragViewCell.h"
 
-@interface ZXDragViewController ()<UICollectionViewDataSource>
+@interface ZXDragViewController ()<ZXDragViewDataSource>
 
 @property(nonatomic, strong) ZXDragView *collectionView;
 
@@ -48,7 +49,7 @@ static NSString * const headerIdentifier = @"header";
 - (void)loadCollectionView {
     self.collectionView = [[ZXDragView alloc] initWithFrame:self.view.bounds collectionViewLayout:[ZXDrayLayout new]];
     // Register cell classes
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
+    [self.collectionView registerClass:[ZXDragViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     [self.collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerIdentifier];
     
     [self.view addSubview:self.collectionView];
@@ -70,6 +71,7 @@ static NSString * const headerIdentifier = @"header";
             if (i == 0) color = UIColor.redColor;
             else if (i == 1) color = UIColor.blueColor;
             else if (i == 2) color = UIColor.brownColor;
+            else color = UIColor.cyanColor;
             DragCellModel *model = [DragCellModel modelWithTitle:title gbColor:color];
             [section addObject:model];
         }
@@ -92,7 +94,7 @@ static NSString * const headerIdentifier = @"header";
 }
 */
 
-#pragma mark <UICollectionViewDataSource>
+#pragma mark <ZXDragViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return self.dataSource.count;
@@ -104,10 +106,10 @@ static NSString * const headerIdentifier = @"header";
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    ZXDragViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     DragCellModel *model = self.dataSource[indexPath.section][indexPath.item];
-    cell.backgroundColor = model.bgColor;
+    cell.data = model;
     
     return cell;
 }
@@ -117,6 +119,10 @@ static NSString * const headerIdentifier = @"header";
     view.backgroundColor = UIColor.yellowColor;
     
     return view;
+}
+
+- (NSArray *)dataSourceOfCollectionView:(ZXDragView *)collectionView {
+    return self.dataSource;
 }
 
 #pragma mark <UICollectionViewDelegate>

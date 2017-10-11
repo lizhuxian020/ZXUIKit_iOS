@@ -8,6 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
+@class ZXDragView;
+
+@protocol ZXDragViewDataSource <UICollectionViewDataSource>
+
+//用来解决pointer is missing nullability type什么鬼的警告
+NS_ASSUME_NONNULL_BEGIN
+@required
+/**
+ *  返回整个CollectionView的数据，必须实现，需根据数据进行移动后的数据重排
+ */
+- (NSArray *)dataSourceOfCollectionView:(ZXDragView *)collectionView;
+NS_ASSUME_NONNULL_END
+@end
+
 @interface ZXDragView : UICollectionView
+
+@property (nonatomic, weak, nullable) id <ZXDragViewDataSource> dataSource;
 
 @end
