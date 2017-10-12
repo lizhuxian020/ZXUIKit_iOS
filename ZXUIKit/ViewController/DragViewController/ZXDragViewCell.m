@@ -19,7 +19,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        [self setUp];
+//        [self setUp];
     }
     return self;
 }
@@ -34,8 +34,8 @@
 - (void)setData:(DragCellModel *)data {
     _data = data;
     self.backgroundColor = data.bgColor;
-    self.title.text = data.title;
-    [self.title sizeToFit];
+//    self.title.text = data.title;
+//    [self.title sizeToFit];
 }
 
 @end

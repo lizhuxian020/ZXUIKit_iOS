@@ -19,11 +19,21 @@ NS_ASSUME_NONNULL_BEGIN
  *  返回整个CollectionView的数据，必须实现，需根据数据进行移动后的数据重排
  */
 - (NSArray *)dataSourceOfCollectionView:(ZXDragView *)collectionView;
-NS_ASSUME_NONNULL_END
+
 @end
+
+@protocol ZXDragViewDelegate <UICollectionViewDelegate>
+
+@required
+- (void)collectionView:(ZXDragView *)collectionView updateDataSourceAfterMove:(NSMutableArray *)dataSource;
+
+@end
+NS_ASSUME_NONNULL_END
 
 @interface ZXDragView : UICollectionView
 
 @property (nonatomic, weak, nullable) id <ZXDragViewDataSource> dataSource;
+
+@property (nonatomic, weak, nullable) id <ZXDragViewDelegate> delegate;
 
 @end

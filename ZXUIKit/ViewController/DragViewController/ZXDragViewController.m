@@ -12,7 +12,7 @@
 #import "ZXDragView.h"
 #import "ZXDragViewCell.h"
 
-@interface ZXDragViewController ()<ZXDragViewDataSource>
+@interface ZXDragViewController ()<ZXDragViewDataSource, ZXDragViewDelegate>
 
 @property(nonatomic, strong) ZXDragView *collectionView;
 
@@ -59,6 +59,7 @@ static NSString * const headerIdentifier = @"header";
     self.collectionView.backgroundColor = [UIColor whiteColor];
     self.collectionView.bounces = true;
     self.collectionView.dataSource = self;
+    self.collectionView.delegate = self;
 }
 
 - (void)buildDataSource {
@@ -126,6 +127,10 @@ static NSString * const headerIdentifier = @"header";
 }
 
 #pragma mark <UICollectionViewDelegate>
+
+- (void)collectionView:(ZXDragView *)collectionView updateDataSourceAfterMove:(NSMutableArray *)dataSource {
+    self.dataSource = dataSource;
+}
 
 /*
 // Uncomment this method to specify if the specified item should be highlighted during tracking

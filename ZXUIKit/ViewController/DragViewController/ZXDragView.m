@@ -24,6 +24,7 @@
 @implementation ZXDragView
 
 @dynamic dataSource;
+@dynamic delegate;
 
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout {
     self = [super initWithFrame:frame collectionViewLayout:layout];
@@ -97,6 +98,8 @@
         [UIView animateWithDuration:0.5 animations:^{
             [self moveItemAtIndexPath:_originIndexPath toIndexPath:_targetIndexPath];
         }];
+        
+        _originIndexPath = _targetIndexPath;
     }];
 }
 
@@ -111,14 +114,35 @@
 }
 
 - (void)updateDataSource {
-    NSMutableArray *arr = [self.dataSource dataSourceOfCollectionView:self].mutableCopy;
-    NSArray *temp = @[@[@(12)], @[@[@"qwe"]], @[@"asd"]];
-    [self flagMap:temp];
-    NSLog(@"%@", temp);
+    NSMutableArray *arr = [self returnMutable:[self.dataSource dataSourceOfCollectionView:self]];
+    
+    if (_originIndexPath.section == _targetIndexPath.section) {
+        NSMutableArray *sectionArr = [arr objectAtIndex:_originIndexPath.section];
+        if (_originIndexPath.item > _targetIndexPath.item) {
+            for (NSInteger i = _originIndexPath.item; i > _targetIndexPath.item; i--) {
+                [sectionArr exchangeObjectAtIndex:i withObjectAtIndex:i - 1];
+            }
+        } else {
+            for (NSInteger i = _originIndexPath.item; i < _targetIndexPath.item; i++) {
+                [sectionArr exchangeObjectAtIndex:i withObjectAtIndex:i + 1];
+            }
+        }
+    } else {
+        NSMutableArray *originSection = [arr objectAtIndex:_originIndexPath.section];
+        NSMutableArray *targetSection = [arr objectAtIndex:_targetIndexPath.section];
+        [targetSection insertObject:originSection[_originIndexPath.item] atIndex:_targetIndexPath.item];
+        [originSection removeObjectAtIndex:_originIndexPath.item];
+    }
+
+    
+    if ([self.delegate respondsToSelector:@selector(collectionView:updateDataSourceAfterMove:)]){
+        [self.delegate collectionView:self updateDataSourceAfterMove:arr];
+    }
 }
 
 - (void)hasInOtherCell:(CGPoint)point callback:(void (^)(NSIndexPath *))callback {
     for (UICollectionViewCell *cell in self.visibleCells) {
+        if ([self cellForItemAtIndexPath:_originIndexPath] == cell) continue;
         if (CGRectContainsPoint(cell.frame, point)) {
             callback([self indexPathForCell:cell]);
             break;
@@ -126,18 +150,21 @@
     }
 }
 
-- (void)flagMap:(NSArray *)array {
-    if (![array isKindOfClass:[NSMutableArray class]]) array = array.mutableCopy;
-    for (id obj in array) {
+- (NSMutableArray *)returnMutable:(NSArray *)array {
+    NSMutableArray *mtArr = (NSMutableArray *)array;
+    if (![array isKindOfClass:[NSMutableArray class]]) mtArr = array.mutableCopy;
+    [mtArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj isKindOfClass:[NSArray class]]) {
-            NSArray *arr = (NSArray *)obj;
+            NSArray *arr = obj;
             if (![arr isKindOfClass:[NSMutableArray class]]) {
                 arr = [arr mutableCopy];
+                [mtArr replaceObjectAtIndex:idx withObject:arr];
             }
-            [self flagMap:arr];
+            NSMutableArray *sonMtArr = mtArr[idx];
+            [mtArr replaceObjectAtIndex:idx withObject:[self returnMutable:sonMtArr]];
         }
-    }
-    
+    }];
+    return mtArr;
 }
 
 @end
