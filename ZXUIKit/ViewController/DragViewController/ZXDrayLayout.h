@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#define kCellWidth (kScreenW - 3 * kItemSpace) / 4.0
+#define kItemSpace 3
 
 @interface ZXDrayLayout : UICollectionViewFlowLayout
 

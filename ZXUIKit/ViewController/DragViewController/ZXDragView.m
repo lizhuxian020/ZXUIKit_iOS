@@ -7,6 +7,7 @@
 //
 
 #import "ZXDragView.h"
+#import "ZXDrayLayout.h"
 
 @interface ZXDragView() {
     NSIndexPath *_originIndexPath;
@@ -26,6 +27,7 @@
 @dynamic dataSource;
 @dynamic delegate;
 
+#pragma mark --init
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout {
     self = [super initWithFrame:frame collectionViewLayout:layout];
     if (self) {
@@ -34,6 +36,7 @@
     return self;
 }
 
+#pragma mark --gesture
 - (void)addGesture {
     UILongPressGestureRecognizer *recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressAction:)];
     recognizer.minimumPressDuration = 0.5f;
@@ -87,8 +90,9 @@
 - (void)gestureMove:(UIGestureRecognizer *)recognizer {
     CGPoint point = [recognizer locationInView:self];
     _tempMoveCell.center = point;
+    BOOL needReturn = false;
     
-    [self hasInOtherCell:point callback:^(NSIndexPath *indexPath) {
+    needReturn = [self hasInHeaderView:point callback:^(NSIndexPath *indexPath) {
         _targetIndexPath = indexPath;
         
         //更新数据库
@@ -101,6 +105,24 @@
         
         _originIndexPath = _targetIndexPath;
     }];
+    
+    if (needReturn) return;
+    
+    needReturn = [self hasInOtherCell:point callback:^(NSIndexPath *indexPath) {
+        _targetIndexPath = indexPath;
+        
+        //更新数据库
+        [self updateDataSource];
+        
+        //做移动
+        [UIView animateWithDuration:0.5 animations:^{
+            [self moveItemAtIndexPath:_originIndexPath toIndexPath:_targetIndexPath];
+        }];
+        
+        _originIndexPath = _targetIndexPath;
+    }];
+    
+    if (needReturn) return;
 }
 
 - (void)gestureEnd:(UIGestureRecognizer *)recognizer {
@@ -140,16 +162,50 @@
     }
 }
 
-- (void)hasInOtherCell:(CGPoint)point callback:(void (^)(NSIndexPath *))callback {
+- (BOOL)hasInOtherCell:(CGPoint)point callback:(void (^)(NSIndexPath *))callback {
     for (UICollectionViewCell *cell in self.visibleCells) {
         if ([self cellForItemAtIndexPath:_originIndexPath] == cell) continue;
         if (CGRectContainsPoint(cell.frame, point)) {
             callback([self indexPathForCell:cell]);
-            break;
+            return true;
         }
     }
+    return false;
 }
 
+
+
+- (BOOL)hasInHeaderView:(CGPoint)point callback:(void (^)(NSIndexPath *))callback {
+    NSArray *headerArr = [self visibleSupplementaryViewsOfKind:UICollectionElementKindSectionHeader];
+    headerArr = [headerArr sortedArrayUsingComparator:^NSComparisonResult(UIView *obj1, UIView *obj2) {
+        if (obj1.zx_y > obj2.zx_y) {
+            return NSOrderedDescending;
+        }
+        return NSOrderedAscending;
+    }];
+    
+    for (NSInteger i = 0; i < headerArr.count; i++) {
+        UIView *headerView = headerArr[i];
+        if (CGRectContainsPoint(headerView.frame, point)) {
+            NSInteger item = point.x / (kCellWidth + kItemSpace);
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:item inSection:i];
+            if ([indexPath isEqual:_originIndexPath]) {
+                return true;
+            }
+            callback(indexPath);
+            return true;
+        }
+    }
+    return false;
+}
+
+#pragma mark --
+
+#pragma mark --utils
+
+/**
+ 遍历array, 返回mutableArray
+ */
 - (NSMutableArray *)returnMutable:(NSArray *)array {
     NSMutableArray *mtArr = (NSMutableArray *)array;
     if (![array isKindOfClass:[NSMutableArray class]]) mtArr = array.mutableCopy;

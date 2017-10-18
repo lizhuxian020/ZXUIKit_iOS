@@ -108,11 +108,10 @@
 		7410319B1F8CB6B300511628 /* DragViewController */ = {
 			isa = PBXGroup;
 			children = (
+				745402A51F9455BB006DBD40 /* ViewController */,
 				741031A61F8CC9A000511628 /* Model */,
 				741031A51F8CC63C00511628 /* View */,
 				741031A11F8CC16400511628 /* Layout */,
-				7410319C1F8CB6B300511628 /* ZXDragViewController.h */,
-				7410319D1F8CB6B300511628 /* ZXDragViewController.m */,
 			);
 			path = DragViewController;
 			sourceTree = "<group>";
@@ -144,6 +143,15 @@
 				741031A81F8CC9ED00511628 /* DragCellModel.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		745402A51F9455BB006DBD40 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7410319C1F8CB6B300511628 /* ZXDragViewController.h */,
+				7410319D1F8CB6B300511628 /* ZXDragViewController.m */,
+			);
+			name = ViewController;
 			sourceTree = "<group>";
 		};
 		74D71A2A1E9E5369000D29A5 = {

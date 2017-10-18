@@ -8,7 +8,6 @@
 
 #import "ZXDrayLayout.h"
 
-#define kItemSpace 3
 
 @implementation ZXDrayLayout
 
@@ -22,7 +21,7 @@
 }
 
 - (void)config {
-    CGFloat itemW = (kScreenW - 3 * kItemSpace) / 4.0;
+    CGFloat itemW = kCellWidth;
     self.itemSize = CGSizeMake(itemW, itemW);
     self.minimumLineSpacing = kItemSpace;
     self.minimumInteritemSpacing = kItemSpace;
