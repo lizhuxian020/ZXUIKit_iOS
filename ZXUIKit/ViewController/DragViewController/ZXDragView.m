@@ -62,6 +62,9 @@
 
 - (void)gestureStart:(UIGestureRecognizer *)recognizer {
     //开始抖动
+    for (UIView *cell in self.visibleCells) {
+        [self startShake:cell level:1];
+    }
     
     _originIndexPath = [self indexPathForItemAtPoint:[recognizer locationInView:self]];
     _targetCell = [self cellForItemAtIndexPath: _originIndexPath];
@@ -71,20 +74,10 @@
     tempCell.zx_size = CGSizeMake(tempCell.zx_width + 10, tempCell.zx_height + 10);
     [self addSubview:tempCell];
     _tempMoveCell = tempCell;
+    [self startShake:_tempMoveCell level:1];
+    
     //目标cell消失
     _targetCell.hidden = true;
-}
-
-- (UIView *)renderView:(UIView *)view {
-    UIImage *snap;
-    UIGraphicsBeginImageContextWithOptions(CGSizeMake(view.bounds.size.width - 1, view.bounds.size.height), 1.0f, 0);
-    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
-    snap = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    UIView *tempView = [UIView new];
-    tempView.layer.contents = (__bridge id)snap.CGImage;
-    tempView.frame = view.frame;
-    return tempView;
 }
 
 - (void)gestureMove:(UIGestureRecognizer *)recognizer {
@@ -127,12 +120,27 @@
 
 - (void)gestureEnd:(UIGestureRecognizer *)recognizer {
     //结束抖动
-    _targetCell.hidden = NO;
+    [self.visibleCells enumerateObjectsUsingBlock:^(__kindof UICollectionViewCell * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj.layer animationForKey:@"shake"]) {
+            [obj.layer removeAnimationForKey:@"shake"];
+        }
+    }];
+    
     //tempCell移动到目标位
-    [_tempMoveCell removeFromSuperview];
-    _tempMoveCell = nil;
-    _originIndexPath = nil;
-    //目标cell复位
+    [UIView animateWithDuration:0.1f animations:^{
+        _tempMoveCell.frame = [self cellForItemAtIndexPath:_originIndexPath].frame;
+    } completion:^(BOOL finished) {
+        
+        //恢复原本cell
+        _targetCell.hidden = NO;
+        [_tempMoveCell removeFromSuperview];
+        _tempMoveCell = nil;
+        _originIndexPath = nil;
+        _targetIndexPath = nil;
+    }];
+    
+    
+    
 }
 
 - (void)updateDataSource {
@@ -173,8 +181,6 @@
     return false;
 }
 
-
-
 - (BOOL)hasInHeaderView:(CGPoint)point callback:(void (^)(NSIndexPath *))callback {
     NSArray *headerArr = [self visibleSupplementaryViewsOfKind:UICollectionElementKindSectionHeader];
     headerArr = [headerArr sortedArrayUsingComparator:^NSComparisonResult(UIView *obj1, UIView *obj2) {
@@ -199,8 +205,6 @@
     return false;
 }
 
-#pragma mark --
-
 #pragma mark --utils
 
 /**
@@ -223,4 +227,38 @@
     return mtArr;
 }
 
+/**
+ 复制View, 创建一个新的View
+ */
+- (UIView *)renderView:(UIView *)view {
+    UIImage *snap;
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(view.bounds.size.width - 1, view.bounds.size.height), 1.0f, 0);
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    snap = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    UIView *tempView = [UIView new];
+    tempView.layer.contents = (__bridge id)snap.CGImage;
+    tempView.frame = view.frame;
+    return tempView;
+}
+
+/**
+ 使View发生抖动
+
+ @param view 目标View
+ @param level 抖动的等级(1~10)
+ */
+- (void)startShake:(UIView *)view level:(CGFloat)level{
+    CAKeyframeAnimation* anim=[CAKeyframeAnimation animation];
+    anim.keyPath=@"transform.rotation";
+    anim.values=@[@(M_PI/180.0 * -level),@(M_PI/180.0 * level),@(M_PI/180.0 * -level)];
+    anim.repeatCount=MAXFLOAT;
+    anim.duration=0.2;
+    
+    if (![view.layer animationForKey:@"shake"]) {
+        [view.layer addAnimation:anim forKey:@"shake"];
+    }
+    
+    
+}
 @end
