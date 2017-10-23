@@ -88,7 +88,7 @@
     needReturn = [self hasInHeaderView:point callback:^(NSIndexPath *indexPath) {
         _targetIndexPath = indexPath;
         
-        //更新数据库
+        //更新数据源
         [self updateDataSource];
         
         //做移动
@@ -104,7 +104,7 @@
     needReturn = [self hasInOtherCell:point callback:^(NSIndexPath *indexPath) {
         _targetIndexPath = indexPath;
         
-        //更新数据库
+        //更新数据源
         [self updateDataSource];
         
         //做移动
@@ -116,6 +116,32 @@
     }];
     
     if (needReturn) return;
+    
+    [self hasInOtherArea:point callback:^(NSInteger section) {
+        
+        NSLog(@"%ld", (long)section);
+        if (_originIndexPath.section == section) {
+            NSInteger lastItem = [self numberOfItemsInSection:section] - 1;
+            _targetIndexPath = [NSIndexPath indexPathForRow:lastItem inSection:section];
+        } else {
+            NSInteger lastItem = [self numberOfItemsInSection:section];
+            _targetIndexPath = [NSIndexPath indexPathForRow:lastItem inSection:section];
+        }
+        
+        
+        
+        
+        //更新数据源
+        [self updateDataSource];
+        
+        //做移动
+        [UIView animateWithDuration:0.5 animations:^{
+            [self moveItemAtIndexPath:_originIndexPath toIndexPath:_targetIndexPath];
+        }];
+        
+        _originIndexPath = _targetIndexPath;
+        
+    }];
 }
 
 - (void)gestureEnd:(UIGestureRecognizer *)recognizer {
@@ -195,14 +221,40 @@
         if (CGRectContainsPoint(headerView.frame, point)) {
             NSInteger item = point.x / (kCellWidth + kItemSpace);
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:item inSection:i];
+            //如果item是在原位
             if ([indexPath isEqual:_originIndexPath]) {
                 return true;
             }
+            
             callback(indexPath);
             return true;
         }
     }
     return false;
+}
+
+- (void)hasInOtherArea:(CGPoint)point callback:(void (^)(NSInteger section))callback {
+    //剩下的如果在self里面 && 不在原位置, 那就是在section的后面的位置
+    if (CGRectContainsPoint(self.frame, point) && !CGRectContainsPoint([self cellForItemAtIndexPath:_originIndexPath].frame, point)) {
+        NSInteger y = point.y;
+        
+        NSArray *headerViewsArr = [[self visibleSupplementaryViewsOfKind:UICollectionElementKindSectionHeader] sortedArrayUsingComparator:^NSComparisonResult(UIView *obj1, UIView *obj2) {
+            if (obj1.zx_y > obj2.zx_y) {
+                return NSOrderedDescending;
+            }
+            return NSOrderedAscending;
+        }];
+        
+        __block NSInteger section = 0;
+        [headerViewsArr enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(UIView *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if (y >= obj.zx_y) {
+                section = idx;
+                *stop = true;
+            }
+        }];
+        
+        callback(section);
+    }
 }
 
 #pragma mark --utils
