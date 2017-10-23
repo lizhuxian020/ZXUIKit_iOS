@@ -225,7 +225,12 @@
             if ([indexPath isEqual:_originIndexPath]) {
                 return true;
             }
-            
+            if (_originIndexPath.section == i && item >= [self numberOfItemsInSection:i]) {
+                return true;
+            }
+            if (_originIndexPath.section !=i && item > [self numberOfItemsInSection:i]) {
+                indexPath = [NSIndexPath indexPathForRow:[self numberOfItemsInSection:i] inSection:i];
+            }
             callback(indexPath);
             return true;
         }
