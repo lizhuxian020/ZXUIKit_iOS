@@ -31,9 +31,14 @@
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout {
     self = [super initWithFrame:frame collectionViewLayout:layout];
     if (self) {
+        [self initProperty];
         [self addGesture];
     }
     return self;
+}
+
+- (void)initProperty {
+    _timestamp = 0.5f;
 }
 
 #pragma mark --gesture
@@ -92,7 +97,7 @@
         [self updateDataSource];
         
         //做移动
-        [UIView animateWithDuration:0.5 animations:^{
+        [UIView animateWithDuration:self.timestamp animations:^{
             [self moveItemAtIndexPath:_originIndexPath toIndexPath:_targetIndexPath];
         }];
         
@@ -108,7 +113,7 @@
         [self updateDataSource];
         
         //做移动
-        [UIView animateWithDuration:0.5 animations:^{
+        [UIView animateWithDuration:self.timestamp animations:^{
             [self moveItemAtIndexPath:_originIndexPath toIndexPath:_targetIndexPath];
         }];
         
@@ -128,14 +133,11 @@
             _targetIndexPath = [NSIndexPath indexPathForRow:lastItem inSection:section];
         }
         
-        
-        
-        
         //更新数据源
         [self updateDataSource];
         
         //做移动
-        [UIView animateWithDuration:0.5 animations:^{
+        [UIView animateWithDuration:self.timestamp animations:^{
             [self moveItemAtIndexPath:_originIndexPath toIndexPath:_targetIndexPath];
         }];
         
@@ -153,7 +155,7 @@
     }];
     
     //tempCell移动到目标位
-    [UIView animateWithDuration:0.1f animations:^{
+    [UIView animateWithDuration:self.timestamp animations:^{
         _tempMoveCell.frame = [self cellForItemAtIndexPath:_originIndexPath].frame;
     } completion:^(BOOL finished) {
         
@@ -318,4 +320,5 @@
     
     
 }
+
 @end

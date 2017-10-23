@@ -32,6 +32,8 @@ NS_ASSUME_NONNULL_END
 
 @interface ZXDragView : UICollectionView
 
+@property(nonatomic, assign) CGFloat timestamp;
+
 @property (nonatomic, weak, nullable) id <ZXDragViewDataSource> dataSource;
 
 @property (nonatomic, weak, nullable) id <ZXDragViewDelegate> delegate;
