@@ -12,6 +12,7 @@
 #import <Masonry.h>
 #import <ZXConvenientCode/ZXSugarCode.h>
 
+
 @interface ViewController ()
 
 @end
@@ -22,6 +23,21 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    
+    
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    self.view.backgroundColor = [UIColor grayColor];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [ZXToast showToast:@"哈哈" duration:2 postion:ZXToastPosition_Top];
+}
+
+- (void)zxbtn {
     ZXButton *btn = [[ZXButton alloc] initWithTitle:@"" attribute:@{} color:[UIColor zx_colorWithHexString:@"#f13a28"] type:ZXButtonType_Rectangle];
     [self.view addSubview:btn];
     [btn sizeToFit];
@@ -29,7 +45,6 @@
     frame.size.width += 100;
     btn.frame = frame;
     btn.center = self.view.center;
-    
     
 }
 

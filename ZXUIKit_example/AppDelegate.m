@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "ViewController.h"
 
 @interface AppDelegate ()
 
@@ -22,7 +23,7 @@
     
     self.window.backgroundColor = [UIColor whiteColor];
     
-    self.window.rootViewController = [[ZXDragViewController alloc] init];
+    self.window.rootViewController = [[ViewController alloc] init];
     
     [self.window makeKeyAndVisible];
     

@@ -13,12 +13,12 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   ZXConvenientCode:
-    :path: "./ZXConvenientCode"
+    :path: ./ZXConvenientCode
 
 SPEC CHECKSUMS:
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   ZXConvenientCode: 054b3b4d06db88507e2e6e710a62478b668c91bc
 
-PODFILE CHECKSUM: 066a237e1f3eaffccbd38a57b3cfe99275d98597
+PODFILE CHECKSUM: 706a1a29f205a4425f50ca82eaf1088f215a2abf
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.3.1
