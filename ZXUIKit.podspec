@@ -89,7 +89,15 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "ZXUIKit/*.{h,m}"
+  # s.source_files  = "ZXUIKit/*.{h,m}"
+    s.subspec 'Interface' do |inter|
+        inter.source_files = 'ZXUIKit/*.{h,m}'
+end
+
+    s.subspec 'Module' do |mo|
+        mo.source_files = 'ZXUIKit/**/*.{h,m}'
+
+end
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
